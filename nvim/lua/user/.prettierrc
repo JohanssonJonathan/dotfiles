@@ -1,0 +1,11 @@
+
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "semi": true,
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+}
