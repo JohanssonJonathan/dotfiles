@@ -21,12 +21,12 @@ return {
 					truncate = 3,
 				},
 				layout_config = {
-
+					width = { padding = 0 },
+					height = { padding = 0 },
+					preview_width = 0.5,
 					horizontal = {
 						preview_cutoff = 0,
 					},
-					width = 0.9,
-					height = 0.9,
 					-- other layout configuration here
 				},
 				-- Default configuration for telescope goes here:
