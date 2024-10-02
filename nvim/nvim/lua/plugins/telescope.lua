@@ -11,9 +11,22 @@ return {
 
 		telescope.setup({
 			defaults = {
-				layout_strategy = "center",
+				layout_strategy = "horizontal",
+				path_display = {
+
+					shorten = {
+						len = 3,
+						exclude = { -1 },
+					},
+					truncate = 3,
+				},
 				layout_config = {
 
+					horizontal = {
+						preview_cutoff = 0,
+					},
+					width = 0.9,
+					height = 0.9,
 					-- other layout configuration here
 				},
 				-- Default configuration for telescope goes here:
