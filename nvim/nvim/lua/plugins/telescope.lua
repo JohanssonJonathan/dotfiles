@@ -10,10 +10,14 @@ return {
 		local telescope = require("telescope")
 
 		telescope.setup({
-			defaults = {
-				layout_strategy = "horizontal",
-				path_display = {
 
+			defaults = {
+
+				border = true,
+				dynamic_preview_title = true,
+				layout_strategy = "horizontal",
+				borderchars = { "", "", "", "", "", "", "", "" },
+				path_display = {
 					shorten = {
 						len = 3,
 						exclude = { -1 },
@@ -25,6 +29,8 @@ return {
 					height = { padding = 0 },
 					preview_width = 0.5,
 					horizontal = {
+
+						prompt_position = "top",
 						preview_cutoff = 0,
 					},
 					-- other layout configuration here
@@ -59,6 +65,7 @@ return {
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, {})
+
 		vim.keymap.set("n", "<leader>fo", builtin.oldfiles, {})
 		vim.keymap.set("n", "<leader>fs", builtin.git_status, {})
 
@@ -71,13 +78,22 @@ return {
 
 		-- Match the exact word
 		vim.keymap.set("n", "<leader>fw", function()
-			builtin.live_grep({
+			builtin.grep_string({
 				prompt_title = "Find strings with exact word",
 				prompt_prefix = "🔥",
-				additional_args = {
-					"--word-regex",
-				},
+				word_match = "-w",
 			})
+			--                            builtin.live_grep({
+			-- 	prompt_title = "Find strings with exact word",
+			-- 	prompt_prefix = "🔥",
+			-- 	additional_args = {
+			-- 		"--word-regex",
+			-- 	},
+			-- })
+		end, {})
+
+		vim.api.nvim_create_user_command("TCommands", function()
+			builtin.commands({})
 		end, {})
 	end,
 }
