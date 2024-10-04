@@ -7,7 +7,12 @@ local cmp = require("cmp")
 lspconfig.tsserver.setup({
 	capabilities = capabilities,
 })
-
+lspconfig.graphql.setup({
+	cmd = { "graphql-lsp", "server", "-m", "stream" },
+	-- I do not need it in other filetypes, adjust for your needs
+	filetypes = { "graphql" },
+	root_dir = lspconfig.util.root_pattern(".git", ".graphqlrc*", ".graphql.config.*", "graphql.config.*"),
+})
 lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	settings = {
