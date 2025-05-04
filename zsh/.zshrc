@@ -1,3 +1,5 @@
+export EDITOR=nvim
+
 myfunction() {
  npm install --userconfig=/Users/jonathanjohansson/publicNPM "$1"
 }

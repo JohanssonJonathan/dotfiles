@@ -5,7 +5,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local cmp = require("cmp")
 
 lspconfig.biome.setup({
-capabilities = capabilities,
+	capabilities = capabilities,
 })
 
 lspconfig.tsserver.setup({
@@ -17,6 +17,7 @@ lspconfig.graphql.setup({
 	filetypes = { "graphql" },
 	root_dir = lspconfig.util.root_pattern(".git", ".graphqlrc*", ".graphql.config.*", "graphql.config.*"),
 })
+
 lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	settings = {
@@ -64,6 +65,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client_id = args.data.client_id
 		local client = vim.lsp.get_client_by_id(client_id)
 		local bufnr = args.buf
+
+		--
+		-- if not client.server_capabilities.documentFormattingProvider then
+		--           print("heeelooo")
+		--           return
+		-- end
+		--
+		-- vim.api.nvim_create_autocmd("BufWritePre", {
+		--           buffer = bufnr,
+		--           callback = function()
+		--                     vim.cmd("Format")
+		--                     -- vim.lsp.buf.format({
+		--                     --           async = false,
+		--                     --           filter = function(c)
+		--                     --                     return c.id == client.id
+		--                     --           end,
+		--                     -- })
+		--           end,
+		-- })
 	end,
 })
 

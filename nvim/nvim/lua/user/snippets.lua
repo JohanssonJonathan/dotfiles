@@ -6,6 +6,6 @@ luaSnip.add_snippets("lua", {
 
           snippet("hej", {
 
-                    text(print("jajamen")),
+                    -- text(print("jajamen")),
           }),
 })

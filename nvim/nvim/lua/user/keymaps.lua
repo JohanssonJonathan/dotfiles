@@ -40,3 +40,4 @@ vim.keymap.set("n", "<leader>gd", function()
 
 	Gitsigns.reset_buffer()
 end)
+

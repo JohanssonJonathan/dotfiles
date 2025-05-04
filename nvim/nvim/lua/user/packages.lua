@@ -1,6 +1,9 @@
--- Lazy package manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+
+
+local lazyExist = vim.uv.fs_stat(lazypath);
+
+if not lazyExist then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -11,6 +14,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	})
 end
 
+
+
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ { import = "plugins" } })
+require("lazy").setup({
+  import = "plugins",
+  opts = {
+    rocks = {
+      -- disables luarocks error when checking :checkhealth lazy.
+      enabled = false,
+      hererocks = false,
+    }
+  }
+})

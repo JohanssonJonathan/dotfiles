@@ -12,3 +12,4 @@ vim.api.nvim_create_user_command("Stage", function()
 	Gitsigns.stage_buffer()
 end, {})
 vim.api.nvim_create_user_command("Term", "vsplit | terminal", {})
+
