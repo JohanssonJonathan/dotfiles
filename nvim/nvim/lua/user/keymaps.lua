@@ -41,3 +41,20 @@ vim.keymap.set("n", "<leader>gd", function()
 	Gitsigns.reset_buffer()
 end)
 
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+
+local function resize_vertical_to_percentage(percent)
+	local total_width = vim.o.columns
+	local target_width = math.floor(total_width * percent / 100)
+
+	vim.cmd("vertical resize " .. target_width)
+end
+
+vim.api.nvim_create_autocmd("WinEnter", {
+	callback = function()
+		resize_vertical_to_percentage(70)
+	end,
+})
