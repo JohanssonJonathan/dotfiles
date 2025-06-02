@@ -1,30 +1,24 @@
 -- triggers format on save
 vim.keymap.set("n", "<leader>f", function()
 	vim.cmd("Format")
-
-	-- local currentPath = vim.fn.expand("%:p")
-	-- vim.cmd("write!" .. currentPath)
 end)
-local function dump(o)
-	if type(o) == "table" then
-		local s = "{ "
-		for k, v in pairs(o) do
-			if type(k) ~= "number" then
-				k = '"' .. k .. '"'
-			end
-			s = s .. "[" .. k .. "] = " .. dump(v) .. ","
-		end
-		return s .. "} "
-	else
-		return tostring(o)
-	end
-end
+-- use the same keymap again to jump into the window.
 vim.keymap.set("n", "<leader>sd", function()
-	vim.diagnostic.open_float({
-		bufnr = 0,
+	vim.diagnostic.open_float(nil, {
+		width = 80, -- Set your desired width here
+		border = "rounded",
 	})
 end)
 
+-- Overriding the styles for vim.lsp.buf.hover()
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+	border = "rounded", -- Options: "single", "double", "rounded", "solid", "shadow"
+	max_width = 80,
+	max_height = 20,
+	focusable = true,
+})
+
+-- use the same keymap again to jump into the window.
 vim.keymap.set("n", "<leader>h", function()
 	vim.lsp.buf.hover()
 end)
