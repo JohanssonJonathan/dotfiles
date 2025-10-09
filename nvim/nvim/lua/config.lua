@@ -5,7 +5,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local cmp = require("cmp")
 
 lspconfig.biome.setup({
-capabilities = capabilities,
+	capabilities = capabilities,
 })
 
 lspconfig.tsserver.setup({

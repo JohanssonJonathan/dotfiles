@@ -1,8 +1,13 @@
 export EDITOR=nvim
 
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH=$JAVA_HOME/bin:$PATH
+
 myfunction() {
  npm install --userconfig=/Users/jonathanjohansson/publicNPM "$1"
 }
+
 
 
 PS1="%F{red}%n@%m %1~ %# "
@@ -44,3 +49,5 @@ commit() {
 
 alias 20="nvm use v20"
 ###source <(npx @volvo/vce-service-util completion-script)
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH="$HOME/.local/bin/omnisharp:$PATH"

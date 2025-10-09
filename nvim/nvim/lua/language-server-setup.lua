@@ -1,36 +1,51 @@
 local lspconfig = require("lspconfig")
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local cmp = require("cmp")
-
-lspconfig.biome.setup({
-	cmd = { "biome", "lsp-proxy" },
-	filetypes = { "javascript", "typescript", "json", "typescriptreact" },
-	root_dir = require("lspconfig").util.root_pattern("biome.json", "package.json", ".git"),
-})
-
-lspconfig.graphql.setup({
-	cmd = { "graphql-lsp", "server", "-m", "stream" },
-	-- I do not need it in other filetypes, adjust for your needs
-	filetypes = { "graphql" },
-	root_dir = lspconfig.util.root_pattern(".git", ".graphqlrc*", ".graphql.config.*", "graphql.config.*"),
-})
-
-lspconfig.lua_ls.setup({
-	capabilities = capabilities,
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = {
-					"vim",
-				},
-			},
-		},
-	},
-})
-
 lspconfig.ts_ls.setup({
-	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		-- Disable formatting from tsserver to avoid conflicts
+		client.server_capabilities.documentFormattingProvider = false
+	end,
 })
+
+-- Biome LSP
+lspconfig.biome.setup({
+	on_attach = function(client, bufnr)
+		-- Enable formatting from Biome
+		client.server_capabilities.documentFormattingProvider = true
+	end,
+	filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+	root_dir = lspconfig.util.root_pattern("biome.json", ".git"),
+})
+-- lspconfig.biome.setup({
+-- 	cmd = { "biome", "lsp-proxy" },
+-- 	filetypes = { "javascript", "typescript", "json", "typescriptreact" },
+-- 	root_dir = require("lspconfig").util.root_pattern("biome.json", "package.json", ".git"),
+-- })
+--
+-- lspconfig.graphql.setup({
+-- 	cmd = { "graphql-lsp", "server", "-m", "stream" },
+-- 	-- I do not need it in other filetypes, adjust for your needs
+-- 	filetypes = { "graphql" },
+-- 	root_dir = lspconfig.util.root_pattern(".git", ".graphqlrc*", ".graphql.config.*", "graphql.config.*"),
+-- })
+--
+-- lspconfig.lua_ls.setup({
+-- 	capabilities = capabilities,
+-- 	settings = {
+-- 		Lua = {
+-- 			diagnostics = {
+-- 				globals = {
+-- 					"vim",
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- })
+--
+-- lspconfig.ts_ls.setup({
+-- 	capabilities = capabilities,
+-- })
 
 -- lspconfig.eslint.setup({
 -- 	capabilities = capabilities,
