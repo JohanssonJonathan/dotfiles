@@ -47,6 +47,17 @@ local function resize_vertical_to_percentage(percent)
 	vim.cmd("vertical resize " .. target_width)
 end
 
+vim.keymap.set("n", "<leader>v]", function()
+	local tag = vim.fn.expand("<cword>")
+	if tag ~= "" then
+		vim.cmd("vsplit")
+		vim.cmd("wincmd l") -- Move to the new split (right)
+		vim.cmd("tjump " .. tag)
+	else
+		print("No tag under cursor")
+	end
+end, { desc = "Jump to tag in vertical split and focus it" })
+
 vim.api.nvim_create_autocmd("WinEnter", {
 	callback = function()
 		resize_vertical_to_percentage(70)
